@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://triyeteng.github.io/mainportal-i-game-com-cn/sitemap.xml
