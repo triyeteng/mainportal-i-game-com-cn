@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>稳定入口·时时彩介绍页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f3f5f7;
+            color: #2c2f33;
+            line-height: 1.6;
+            padding: 2rem 1.2rem;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        /* hero 区域 */
+        .hero {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 3rem 2.5rem 2.8rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e6eaef;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #1f2a36;
+            margin-bottom: 0.6rem;
+        }
+        .hero h1 span {
+            font-weight: 600;
+            color: #1f3a5f;
+        }
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #546e7a;
+            max-width: 600px;
+            margin: 0.4rem auto 1.8rem;
+        }
+        .hero .cta-sentence {
+            display: inline-block;
+            background: #edf1f5;
+            padding: 0.6rem 1.8rem;
+            border-radius: 60px;
+            font-size: 1.05rem;
+            border: 1px solid #d7dee6;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .hero .cta-sentence a {
+            color: #1f3a5f;
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1px solid #b0c4d9;
+            transition: border-color 0.15s;
+        }
+        .hero .cta-sentence a:hover {
+            border-color: #1f3a5f;
+        }
+        /* 卡片通用 */
+        .card-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin-bottom: 2.2rem;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.8rem 1.8rem 2rem;
+            border: 1px solid #e2e8ef;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.02);
+            flex: 1 1 280px;
+            transition: box-shadow 0.15s;
+        }
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04), 0 2px 6px rgba(0, 0, 0, 0.02);
+        }
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #1f2a36;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+        }
+        .card h3 i {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background: #eef3f9;
+            border-radius: 12px;
+            margin-right: 10px;
+            text-align: center;
+            line-height: 28px;
+            font-size: 1rem;
+            color: #1f3a5f;
+            font-style: normal;
+        }
+        .card p {
+            color: #3d4b57;
+            font-size: 0.95rem;
+        }
+        .card ul {
+            list-style: none;
+            margin-top: 0.4rem;
+        }
+        .card ul li {
+            padding: 0.3rem 0 0.3rem 1.3rem;
+            position: relative;
+            color: #3d4b57;
+            font-size: 0.95rem;
+        }
+        .card ul li::before {
+            content: "·";
+            position: absolute;
+            left: 0.2rem;
+            color: #7f95ad;
+            font-weight: 700;
+        }
+        /* 说明区 - 宽卡片 */
+        .explain-block {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2.2rem 2.2rem;
+            margin-bottom: 2.2rem;
+            border: 1px solid #e2e8ef;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+        .explain-block h2 {
+            font-size: 1.45rem;
+            font-weight: 500;
+            color: #1f2a36;
+            margin-bottom: 1rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px solid #e6ecf3;
+            display: inline-block;
+        }
+        .explain-block p {
+            color: #3d4b57;
+            margin-bottom: 0.8rem;
+        }
+        .explain-block p:last-child {
+            margin-bottom: 0;
+        }
+        .explain-block a {
+            color: #1f3a5f;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #c5d3e3;
+            font-weight: 500;
+        }
+        .explain-block a:hover {
+            text-decoration-color: #1f3a5f;
+        }
+        /* FAQ 摘要 */
+        .faq-summary {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.8rem 2.2rem 2rem;
+            margin-bottom: 2.2rem;
+            border: 1px solid #e2e8ef;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+        .faq-summary h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #1f2a36;
+            margin-bottom: 1.2rem;
+        }
+        .faq-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+        }
+        .faq-item:last-child {
+            margin-bottom: 0;
+        }
+        .faq-q {
+            font-weight: 500;
+            color: #1f2a36;
+            font-size: 0.98rem;
+            margin-bottom: 0.2rem;
+        }
+        .faq-a {
+            color: #546e7a;
+            font-size: 0.93rem;
+            padding-left: 0.2rem;
+        }
+        /* 底部链接 */
+        .footer-links {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 1.6rem 2rem;
+            text-align: center;
+            border: 1px solid #e2e8ef;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+        .footer-links p {
+            color: #5a6b7a;
+            font-size: 0.95rem;
+        }
+        .footer-links a {
+            color: #1f3a5f;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #c5d3e3;
+            font-weight: 500;
+        }
+        .footer-links a:hover {
+            text-decoration-color: #1f3a5f;
+        }
+        .footer-links .sep {
+            color: #bccbd8;
+            margin: 0 0.6rem;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #e2e8ef;
+            margin: 2rem 0 1rem;
+        }
+        /* 响应式 */
+        @media (max-width: 640px) {
+            body {
+                padding: 1.2rem 0.9rem;
+            }
+            .hero {
+                padding: 2rem 1.2rem;
+            }
+            .hero h1 {
+                font-size: 1.9rem;
+            }
+            .card-grid {
+                gap: 1rem;
+            }
+            .card {
+                flex: 1 1 100%;
+            }
+            .explain-block, .faq-summary, .footer-links {
+                padding: 1.5rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- hero 区域：稳定入口概念 + 页面说明 -->
+    <div class="hero">
+        <h1><span>时时彩</span> · 稳定的信息入口</h1>
+        <div class="sub">一个侧重内容整理与页面说明的参考页，帮助浏览者快速了解时时彩的基本面貌。</div>
+        <div class="cta-sentence">
+            日常了解时时彩相关信息，可参考 <a href="https://home-ssc.com">时时彩</a> 所提供的内容梳理。
+        </div>
+    </div>
+
+    <!-- 优势区：三个卡片 -->
+    <div class="card-grid">
+        <div class="card">
+            <h3><i>❶</i> 结构清晰</h3>
+            <p>页面分区明确，从概述到细节都有对应模块，便于按需查阅，减少信息筛选成本。</p>
+        </div>
+        <div class="card">
+            <h3><i>❷</i> 内容平实</h3>
+            <p>不渲染夸张表述，只整理可参考的说明与常见问题摘要，适合想要了解基本情况的用户。</p>
+        </div>
+        <div class="card">
+            <h3><i>❸</i> 持续迭代</h3>
+            <p>页面内容会基于反馈与信息更新进行调整，保持实用性和可读性之间的平衡。</p>
+        </div>
+    </div>
+
+    <!-- 说明区：从稳定入口与页面说明的角度展开 -->
+    <div class="explain-block">
+        <h2>关于这个页面</h2>
+        <p>本页并非时时彩的完整官网，而是一个 <strong>介绍页与说明页</strong>——旨在以平实语言整理用户可能关心的几项基础信息。如果你正在寻找关于时时彩的稳定参考入口，下面几个方向或许有帮助：</p>
+        <p>• 概述：时时彩是一种数字型组合玩法，其开奖结果由多个位置上的数字组成，常见于彩票讨论场景。<br>
+        • 用途：部分用户将其作为观察数字分布、历史数据的参考，而非作为单一投注依据。<br>
+        • 说明：任何涉及数字组合的内容都应基于理性认知，本页不提供任何保证或承诺。</p>
+        <p>想直接浏览时时彩相关的内容整理，可以前往 <a href="https://home-ssc.com">时时彩</a> 页面查看更多细节。</p>
+    </div>
+
+    <!-- FAQ 摘要：4个常见问题 -->
+    <div class="faq-summary">
+        <h2>常见问题摘要</h2>
+        <div class="faq-item">
+            <span class="faq-q">Q: 时时彩的开奖频率是怎样的？</span>
+            <span class="faq-a">不同地区或平台规则不同，常见为每几分钟至每天多期，具体以实际场景为准。</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">Q: 页面上的信息是否实时更新？</span>
+            <span class="faq-a">本页为介绍说明性质，不直接提供实时数据。如需最新信息，建议参考对应的官方或授权渠道。</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">Q: 时时彩适合用来做长期分析吗？</span>
+            <span class="faq-a">部分用户会将其作为数字趋势的观察对象，但任何数字游戏都带有不确定性，理性看待更重要。</span>
+        </div>
+        <div class="faq-item">
+            <span class="faq-q">Q: 如何找到更完整的说明？</span>
+            <span class="faq-a">可以直接访问 <a href="https://home-ssc.com">时时彩</a> 页面，那里整理了更多背景与常见说明。</span>
+        </div>
+    </div>
+
+    <!-- 底部链接 -->
+    <div class="footer-links">
+        <p>
+            <a href="https://home-ssc.com">时时彩</a> 
+            <span class="sep">·</span> 
+            内容仅供参考 
+            <span class="sep">·</span> 
+            理性对待数字类信息
+        </p>
+        <p style="margin-top: 0.4rem; font-size: 0.85rem; color: #7f95ad;">
+            本页为独立介绍页，与任何平台无直接关联。
+        </p>
+    </div>
+    <hr>
+    <div style="text-align: center; font-size: 0.8rem; color: #8f9eac; margin-top: 1.2rem;">
+        — 页面结构 · 稳定入口 · 平实说明 —
+    </div>
+</div>
+</body>
+</html>
