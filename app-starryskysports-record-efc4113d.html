@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星空体育 · 数据查询与赛事对照</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f4f8fb;
+            color: #1a2d34;
+            line-height: 1.6;
+            padding: 0 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 0 60px;
+        }
+
+        /* hero 区域 */
+        .hero {
+            text-align: center;
+            padding: 50px 10px 30px;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 500;
+            color: #0d7377;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #3d5a5e;
+        }
+
+        .hero .tagline {
+            display: inline-block;
+            background: #d0ecec;
+            color: #0a5c5f;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        /* 网格卡片系统 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 28px 22px;
+            box-shadow: 0 4px 12px rgba(13, 115, 119, 0.06);
+            border-left: 4px solid #2b9b9b;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 24px rgba(13, 115, 119, 0.1);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #0b6b6b;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 2px dotted #c7e2e2;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #2a474a;
+        }
+
+        .card ul {
+            padding-left: 18px;
+            list-style: square;
+        }
+
+        .card li {
+            margin-bottom: 8px;
+        }
+
+        /* 场景区（两栏） */
+        .scene-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            margin: 50px 0 40px;
+        }
+
+        .scene-block {
+            flex: 1 1 280px;
+            background: #eaf6f6;
+            border-radius: 24px;
+            padding: 28px 24px;
+        }
+
+        .scene-block h2 {
+            font-size: 1.3rem;
+            color: #0d7377;
+            margin-bottom: 16px;
+        }
+
+        .scene-block p {
+            color: #1f3f42;
+            margin-bottom: 10px;
+        }
+
+        .scene-block .highlight {
+            background: #c3e4e5;
+            padding: 2px 10px;
+            border-radius: 12px;
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #044b4d;
+        }
+
+        /* 提示卡片 */
+        .tip-card {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 30px 28px;
+            margin: 30px 0 20px;
+            border: 1px solid #b7dadb;
+            box-shadow: 0 0 0 4px #e1f2f2;
+        }
+
+        .tip-card h4 {
+            font-size: 1.1rem;
+            color: #0a6161;
+            margin-bottom: 12px;
+        }
+
+        .tip-card p {
+            color: #2d4f52;
+            font-size: 0.95rem;
+        }
+
+        .tip-card a {
+            color: #0a7575;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            font-weight: 500;
+        }
+
+        .tip-card a:hover {
+            color: #044f4f;
+            text-decoration: none;
+            background: #c6e6e6;
+            padding: 1px 4px;
+            border-radius: 4px;
+        }
+
+        /* FAQ 摘要（简洁） */
+        .faq-mini {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 30px;
+            margin: 40px 0 30px;
+        }
+
+        @media (max-width: 640px) {
+            .faq-mini {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .faq-item {
+            background: #f3fafb;
+            padding: 16px 18px;
+            border-radius: 18px;
+            border-left: 3px solid #46a3a3;
+        }
+
+        .faq-item strong {
+            display: block;
+            color: #135e60;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+
+        .faq-item p {
+            color: #2e5256;
+            font-size: 0.9rem;
+        }
+
+        /* 脚注 */
+        .footer-note {
+            text-align: center;
+            padding: 40px 0 20px;
+            border-top: 1px solid #cfe2e3;
+            margin-top: 40px;
+            color: #3d6b6d;
+            font-size: 0.85rem;
+        }
+
+        .footer-note a {
+            color: #0d7377;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-note a:hover {
+            text-decoration: underline;
+        }
+
+        /* 响应式微调 */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .card, .scene-block {
+                padding: 20px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- hero 摘要 -->
+        <div class="hero">
+            <span class="tagline">信息对照 · 延伸阅读</span>
+            <h1>星空体育 · 数据查询平台</h1>
+            <p>围绕赛事、队伍与选手的结构化信息聚合，面向日常查询、对照分析和背景延伸。简洁、可靠、无干扰。</p>
+        </div>
+
+        <!-- 亮点卡片网格 -->
+        <div class="grid">
+            <div class="card">
+                <h3>📋 摘要式呈现</h3>
+                <p>每项数据均以卡片或列表展示，减少冗长描述。从赛程安排到历史交记录，快速定位核心内容。</p>
+            </div>
+            <div class="card">
+                <h3>⚖️ 多维度对照</h3>
+                <p>支持队伍、联赛、赛季等多层对照。通过并列视图、时间轴与关键指标，辅助用户自行判断。</p>
+            </div>
+            <div class="card">
+                <h3>📖 延伸阅读</h3>
+                <p>每个条目下方附带相关背景、规则解读或数据来源说明，为深度查询提供参考路径。</p>
+            </div>
+            <div class="card">
+                <h3>🧭 低干扰浏览</h3>
+                <p>无弹窗、无自动播放、无诱导弹层。界面聚焦于信息本身，适合需要冷静阅读的场合。</p>
+            </div>
+        </div>
+
+        <!-- 使用建议 / 场景 (双列) -->
+        <div class="scene-section">
+            <div class="scene-block">
+                <h2>🔍 日常查询</h2>
+                <p>快速检索当前赛季数据、选手档案或近期赛果。直接输入关键词或浏览分类索引。<br>
+                <span class="highlight">示例</span> 查看某球队近五场主客场表现，页面提供胜率、得分差、控球率等摘要。</p>
+            </div>
+            <div class="scene-block">
+                <h2>📊 对照分析</h2>
+                <p>并排比较两支队伍或两名选手的核心数据。页面自动计算差值、排名变化与趋势标注。<br>
+                <span class="highlight">适用</span> 赛前参考、赛季复盘、数据归档。</p>
+            </div>
+        </div>
+
+        <!-- 带链接的说明（可信克制） -->
+        <div class="tip-card">
+            <h4>关于平台定位</h4>
+            <p>
+                <a href="https://app-starryskysports.com">星空体育</a> 主要提供联赛、队伍及选手的结构化数据查询服务，内容来源为公开统计与赛事记录。
+                平台不提供投注、预测或任何资金相关服务，所有数据仅供用户自行参考与分析。建议结合官方赛事公告及多方信息进行综合判断。
+            </p>
+            <p style="margin-top: 12px; font-size: 0.9rem; color: #38686b;">
+                * 数据更新频率为每日一次，重大赛事期间可能加更。如发现差异，请以对应赛事官方数据为准。
+            </p>
+        </div>
+
+        <!-- FAQ 摘要 (四问) -->
+        <div class="faq-mini">
+            <div class="faq-item">
+                <strong>是否包含历史赛季？</strong>
+                <p>覆盖近五个完整赛季及当前赛季，早期数据以摘要形式呈现。具体可查赛季页。</p>
+            </div>
+            <div class="faq-item">
+                <strong>数据来源可靠吗？</strong>
+                <p>整合自多家公开统计机构及赛事官方发布，每条数据均标注参考来源。</p>
+            </div>
+            <div class="faq-item">
+                <strong>需要注册吗？</strong>
+                <p>浏览摘要和基础查询无需注册。部分对照和保存功能可选登录，便于个性化。</p>
+            </div>
+            <div class="faq-item">
+                <strong>移动端体验如何？</strong>
+                <p>完全响应式设计，卡片自适应，手指操作友好。支持横屏查看对照表。</p>
+            </div>
+        </div>
+
+        <!-- 少量延伸阅读建议 -->
+        <div style="background: #ffffff; border-radius: 24px; padding: 20px 24px; margin: 20px 0 10px; border: 1px solid #c2ddde;">
+            <p style="color: #0a5a5c; font-weight: 500; margin-bottom: 6px;">📎 延伸阅读方向</p>
+            <p style="color: #2c5154; font-size: 0.9rem;">
+                各联赛规则变动 · 选手技术统计口径说明 · 赛制演变与数据对照方法<br>
+                如需深入了解，可在对应页面底部查阅参考文档与数据附录。
+            </p>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer-note">
+            <p>基于公开数据整理 · <a href="https://app-starryskysports.com">星空体育</a> · 仅供信息参考</p>
+        </div>
+
+    </div>
+</body>
+</html>
